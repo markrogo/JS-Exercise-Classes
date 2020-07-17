@@ -141,11 +141,26 @@ class Instructor extends Lambdasian {
 } demo (subject) {
     let phrase = `Today we are learning about ${subject}`;
     return phrase;
-} grade (student, subject) {
-    let phrase = `${student.name} receives a perfect score on ${subject}`;
-    return phrase;
-} 
-};
+} grade (studentObj, subject) {
+    let phrase = `${studentObj.name} receives a perfect score on ${subject}`;
+    
+    let gradeDirection = Math.floor(Math.random() * 100); 
+    let gradeChange = Math.floor(Math.random() * 20);
+    if (gradeDirection > 30) {
+        studentObj.grade = studentObj.grade + gradeChange;
+        console.log (`${studentObj.name} has a current grade of ${studentObj.grade}`);
+        
+    } else {
+        studentObj.grade = studentObj.grade - gradeChange;
+        console.log (`${studentObj.name} has a current grade of ${studentObj.grade}`);
+
+    }
+       return phrase;  
+        
+      }
+  };
+
+
 
 /*
   TASK 5
@@ -169,6 +184,17 @@ class Student extends Lambdasian {
     this.previousBackground = studentObj.previousBackground;
     this.className = studentObj.className;
     this.favSubjects = studentObj.favSubjects;
+    this.grade = studentObj.grade;
+    this.grade = 0;
+    this.grade = Math.floor(Math.random() * 100);
+    this.readyToGraduate = studentObj.readyToGraduate;
+    if (this.grade >= 70) {
+      this.readyToGraduate = true;
+    } else {
+    this.readyToGraduate = false;
+    }
+    console.log (`The initial grade is ${this.grade}`);
+    console.log (`Ready to graduate is ${this.readyToGraduate}`);
   } listSubjects () { 
        let phrase = ""; 
        let subArray = this.favSubjects;
@@ -183,6 +209,13 @@ class Student extends Lambdasian {
   } sprintChallenge (subject) {
       let phrase = `${this.name} has begun sprint challenge on ${subject}`
       return phrase;
+  } graduate (studentObj) {
+      if (studentObj.grade >= 70) {
+        studentObj.readyToGraduate = true;
+        console.log (`${studentObj.name} is ready to graduate!`);
+      } else {
+        console.log (`${studentObj.name} is NOT ready to graduate! Grade them some more`);
+      }
   }
 };
 // let subjArray = ["HTML", "JS", "Python"];
@@ -216,7 +249,7 @@ class ProjectManager extends Instructor {
       let phrase = `${this.name} debugs ${studObj.name}'s code on ${subject}`;
       return phrase;
   }
-}
+};
 
 /*
   STRETCH PROBLEM (no tests!)
@@ -226,6 +259,31 @@ class ProjectManager extends Instructor {
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+const markObj = new Student ({name: "Mark", age: 53, location: "Seattle", previousBackground: "Entrepreneur", className: "WEBPT21", favSubjects: ["HTML", "JS", "Python"]} );
+const nathanObj = new Instructor ({name: "Nathan", age: 33, location: "Portlans"});
+console.log (markObj);
+console.log (nathanObj);
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
+
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
+
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
+
+nathanObj.grade (markObj, "HTML");
+markObj.graduate (markObj);
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
